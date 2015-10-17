@@ -35,8 +35,8 @@ class GentlemanAsyncTask extends AsyncTask {
 		}
 	}
 	public function onCompletion(Server $server) {
-		$this->badQueue = null;
-		$this->dictionary = null;
+		// $this->badQueue = null;
+		// $this->dictionary = null;
 		$plugin = $server->getPluginManager ()->getPlugin ( "Gentleman" );
 		if ($plugin instanceof Gentleman) {
 			$plugin->asyncProcess ( $this->name, $this->format, $this->message, $this->find, $this->eventType );
@@ -66,8 +66,9 @@ class GentlemanAsyncTask extends AsyncTask {
 						$find_count [$match_alpha] = 0; // ["바"=>0 "보"=0]
 						break;
 					}
-				if ($wordLength == count ( $find_count ))
-					return implode ( "", $queue );
+				if ($wordLength == count ( $find_count )){
+					return implode ( "", (array)$queue );
+				}
 			}
 		}
 		return null;
